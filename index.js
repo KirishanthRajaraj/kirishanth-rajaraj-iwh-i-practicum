@@ -14,8 +14,33 @@ const PRIVATE_APP_KEY = process.env.PRIVATE_APP_KEY;
 
 // TODO: ROUTE 1 - Create a new app.get route for the homepage to call your custom object data. Pass this data along to the front-end and create a new pug template in the views folder.
 app.get("/", async (req, res) => {
-  res.send("home");
-  console.log(PRIVATE_APP_KEY);
+  const ologyType = "2-131427213";
+  let data;
+  const limit = "/50/";
+
+  const properties = [
+    "name",
+    "description"
+  ];
+
+  const customObjUrl = "https://api.hubapi.com/crm/v3/objects/" + ologyType;
+  const headers = {
+    Authorization: `Bearer ${PRIVATE_APP_KEY}`,
+    "Content-Type": "application/json",
+  };
+
+  try {
+    const response = await axios.post(customObjUrl, properties, { headers });
+    data = response.data.results;
+    console.log(data);
+  } catch (error) {
+    console.error(error);
+  }
+
+  res.render("homepage", {
+    title: "Custom Object Table | Integrating With HubSpot I Practicum",
+    data,
+  });
 });
 // * Code for Route 1 goes here
 
