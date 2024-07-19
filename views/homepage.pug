@@ -4,6 +4,7 @@ html
     title= `${title}`
     meta(name="viewport" content="width=device-width, intitial-scale=1")
     link(rel="stylesheet", href="/css/style.css")
+
   body
     h1 Ologies Object Table
     a(href='/update-cobj') Add/Update this table
@@ -14,6 +15,6 @@ html
             th Years to study
         each ology in data 
             tr 
-                td #{ology.name}
-                td #{ology.description}
-                td #{ology.years_to_study}
+                td #{ology.properties.name}
+                td #{ology.properties.description}
+                td #{ology.properties.years_to_study}

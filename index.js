@@ -16,11 +16,12 @@ const PRIVATE_APP_KEY = process.env.PRIVATE_APP_KEY;
 app.get("/", async (req, res) => {
   const ologyType = "2-131427213";
   let data;
-  const limit = "/50/";
+  const limit = 50;
 
   const properties = [
     "name",
-    "description"
+    "description",
+    "years_to_study"
   ];
 
   const customObjUrl = "https://api.hubapi.com/crm/v3/objects/" + ologyType;
@@ -30,7 +31,18 @@ app.get("/", async (req, res) => {
   };
 
   try {
-    const response = await axios.post(customObjUrl, properties, { headers });
+    const response = await axios({
+        method: "GET",
+        url: customObjUrl,
+        params: {
+          properties: properties.join(","),
+        },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + PRIVATE_APP_KEY,
+        },
+      });
+
     data = response.data.results;
     console.log(data);
   } catch (error) {
