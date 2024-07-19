@@ -5,5 +5,17 @@ html
     meta(name="viewport" content="width=device-width, intitial-scale=1")
     link(rel="stylesheet", href="/css/style.css")
   body
-    h1 Updates
-      a(href='/') Return to the homepage
+    h1 Create "Ology" Custom Object
+        form(action="/update" method="post")
+            div
+                label(for="name") Name:
+                input(type="text" id="name" name="name" required)
+            div
+                label(for="description") Description:
+                input(type="text" id="description" name="description" required)
+            div
+                label(for="years_to_study") Years to Study:
+                input(type="number" id="years_to_study" name="years_to_study" required)
+            div
+                button(type="submit") Submit
+        a(href='/') Return to the homepage
